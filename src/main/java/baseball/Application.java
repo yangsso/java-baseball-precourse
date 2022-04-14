@@ -2,6 +2,8 @@ package baseball;
 
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
@@ -27,7 +29,29 @@ public class Application {
     }
 
     public static int[] check(String input, List<Integer> answer){
-        return new int[]{};
+        if (input.length() > 3){
+            throw new IllegalArgumentException();
+        }
+        int[] result = new int[]{};
+        for (int i = 0; i < input.length(); i++){
+            try {
+                int val = (int) input.charAt(0);
+                if (!answer.contains(val)){
+                    continue;
+                }
+
+                if (answer.get(i) == val) {
+                    result[0] += 1;
+                    continue;
+                }
+
+                result[1] += 1;
+            } catch (Exception e){
+                throw new IllegalArgumentException();
+            }
+        }
+
+        return result;
     }
 
     public static String getResultMsg(int[] result){
