@@ -12,16 +12,20 @@ public class Application {
         int i = 0;
         List<Integer> answer = Randoms.pickUniqueNumbersInRange(1, 9, 3);
         while (true){
+            System.out.print("숫자를 입력해주세요 : ");
             String input = Console.readLine();
             int[] result = check(input, answer);
             System.out.println(getResultMsg(result));
             if (result[0] == 3){
+                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종");
                 i = 3;
             }
             i++;
-            if (i > 3){
-                boolean wantContinue = Console.readLine().equals("1");
-                if (!wantContinue) break;
+            if (i >= 3){
+                System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+                int continueInput = Integer.parseInt(Console.readLine());
+                if (continueInput > 2 || continueInput < 1) throw new IllegalArgumentException();
+                if (continueInput == 2) break;
                 i = 0;
                 answer = Randoms.pickUniqueNumbersInRange(1, 9, 3);
             }
@@ -29,13 +33,13 @@ public class Application {
     }
 
     public static int[] check(String input, List<Integer> answer){
-        if (input.length() > 3){
+        if (input.length() != 3){
             throw new IllegalArgumentException();
         }
-        int[] result = new int[]{};
+        int[] result = new int[3];
         for (int i = 0; i < input.length(); i++){
             try {
-                int val = (int) input.charAt(0);
+                int val = input.charAt(i) - '0';
                 if (!answer.contains(val)){
                     continue;
                 }
