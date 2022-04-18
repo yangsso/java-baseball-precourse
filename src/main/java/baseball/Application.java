@@ -3,7 +3,6 @@ package baseball;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
@@ -17,7 +16,7 @@ public class Application {
             int[] result = check(input, answer);
             System.out.println(getResultMsg(result));
             if (result[0] == 3){
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종");
+                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종료");
                 i = 3;
             }
             i++;
@@ -33,7 +32,7 @@ public class Application {
     }
 
     public static int[] check(String input, List<Integer> answer){
-        if (input.length() != 3){
+        if (input.length() > 3){
             throw new IllegalArgumentException();
         }
         int[] result = new int[3];
