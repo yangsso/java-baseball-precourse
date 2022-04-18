@@ -37,21 +37,21 @@ public class Application {
         }
         int[] result = new int[3];
         for (int i = 0; i < input.length(); i++){
-            try {
-                int val = input.charAt(i) - '0';
-                if (!answer.contains(val)){
-                    continue;
-                }
-
-                if (answer.get(i) == val) {
-                    result[0] += 1;
-                    continue;
-                }
-
-                result[1] += 1;
-            } catch (Exception e){
+            int val = input.charAt(i) - '0';
+            if (val < 1 || val > 9){
                 throw new IllegalArgumentException();
             }
+
+            if (!answer.contains(val)){
+                continue;
+            }
+
+            if (answer.get(i) == val) {
+                result[0] += 1;
+                continue;
+            }
+
+            result[1] += 1;
         }
 
         return result;

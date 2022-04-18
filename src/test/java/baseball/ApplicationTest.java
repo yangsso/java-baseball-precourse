@@ -9,14 +9,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+
     @Test
-    void 게임종료_후_재시작() {
-        assertRandomNumberInRangeTest(
+    void 게임1판_경우의수(){
+        assertSimpleTest(
                 () -> {
-                    run("246", "135", "1", "597", "589", "2");
-                    assertThat(output()).contains("낫싱", "3스트라이크", "1볼 1스트라이크", "3스트라이크", "게임 종료");
-                },
-                1, 3, 5, 5, 8, 9
+                    run("123", "456", "789", "2");
+                    assertThat(output()).containsAnyOf("낫싱", "스트라이크", "볼", "게임 종료");
+                }
+        );
+    }
+
+    @Test
+    void 입력값_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
